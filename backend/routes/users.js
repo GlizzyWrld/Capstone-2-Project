@@ -15,6 +15,7 @@ router.get("/profile/:username", jwtUtil.verifyToken, async (req, res) => {
 
     console.log(username, user);
     if (!user) {
+      console.log("User not found... ", "this is user.. ", user)
       return res
         .status(404)
         .json({ message: `${username} not found in the database` });
@@ -22,6 +23,7 @@ router.get("/profile/:username", jwtUtil.verifyToken, async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
+   
     res.status(500).json({ message: error.message });
   }
 });
@@ -56,7 +58,7 @@ router.delete("/profile/:username", jwtUtil.verifyToken, async (req, res) => {
         .status(404)
         .json({ message: `${username} not found in the database` });
     }
-    res.status(204);
+    res.sendStatus(204);
     console.log("The following user has been deleted", user);
   } catch (error) {
     res.status(500).json({ message: error.message });

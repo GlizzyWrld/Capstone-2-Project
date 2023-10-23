@@ -51,6 +51,17 @@ class BarkipediaApi {
         }
     }
 
+    //method to get img for facts of day
+    static async getImage() {
+        try {
+            let res = await axios.get('https://dog.ceo/api/breeds/image/random');
+            return res.data
+        } catch (error) {
+            console.error('Error getting image', error);
+            throw error;
+        }
+    }
+
     // method to get facts for users 
     static async getFacts() {
         try {

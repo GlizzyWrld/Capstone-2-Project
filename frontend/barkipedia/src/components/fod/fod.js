@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchFact } from "../../redux/reducers/factReducer";
+import { fetchFact, fetchImage } from "../../redux/reducers/factReducer";
 
 function Fod() {
-  const { factValue } = useSelector((state) => state.facts);
+  const { factValue, imageUrl } = useSelector((state) => state.facts);
   const dispatch = useDispatch();
 
-  // State to hold the countdown timer value, 24 hours
-  const [timeLeft, setTimeLeft] = useState(24 * 60 * 60);
+  // State to hold the countdown timer value, minute and a half
+  const [timeLeft, setTimeLeft] = useState(90);
 
   useEffect(() => {
     // Dispatch the action immediately upon mounting
     dispatch(fetchFact());
+    dispatch(fetchImage());
 
-    // timer to repeat the dispatch every 24 hours
+    // timer to repeat the dispatch every minute and a half
     const interval = setInterval(() => {
       dispatch(fetchFact());
-    }, 24 * 60 * 60 * 1000); // 24 hours(milliseconds)
+      dispatch(fetchImage());
+
+      setTimeLeft(90);
+    }, 90 * 1000); // minute and a half(milliseconds)
 
     // countdown timer that decreases every second
     const countdown = setInterval(() => {
@@ -32,13 +36,25 @@ function Fod() {
 
   const fact = factValue && factValue.data ? factValue.data[0] : null;
 
+  const backgroundStyle = {
+    backgroundColor: `skyblue`,
+  };
+
   return (
-    <div>
-      <h1>The Fact of the Day is :</h1>
-      <div>{fact ? <p key={fact.id}>{fact.attributes.body}</p> : null}</div>
+    <div style={backgroundStyle}>
+      <h1>Here are the facts of the day:</h1>
+      <div className="fact-border">
+        {fact ? <p key={fact.id}>{fact.attributes.body}</p> : null}
+      </div>
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt="Dog"
+          style={{ width: "100%", maxWidth: "500px" }}
+        />
+      ) : null}
       <p>
-        Next Fact in: {Math.floor(timeLeft / 3600)}h {Math.floor((timeLeft % 3600) / 60)}m{" "}
-        {timeLeft % 60}s
+        Next Fact in: {Math.floor((timeLeft % 3600) / 60)}m {timeLeft % 60}s
       </p>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getSavedFacts, deleteFact } from "../../redux/reducers/userReducer";
+import Button from '@mui/material/Button';
 
 function Saved() {
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ function Saved() {
       <h2>Saved Facts</h2>
       <ul>
         {savedFacts.map((fact, index) => (
-          <li key={index}>
+          <li className='fact-border' key={index}>
             {fact}
-            <button onClick={() => handleDelete(fact)}>Delete</button>
+            <Button size="medium" variant="contained" onClick={() => handleDelete(fact)}>Delete</Button>
           </li>
         ))}
       </ul>

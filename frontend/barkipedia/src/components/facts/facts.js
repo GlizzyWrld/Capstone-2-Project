@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFacts } from "../../redux/reducers/factReducer";
 import { saveFact } from "../../redux/reducers/userReducer";
+import Button from '@mui/material/Button';
 
 function Facts() {
   const { factValue } = useSelector((state) => state.facts);
@@ -15,13 +16,13 @@ function Facts() {
 
   return (
     <div>
-      <button onClick={() => dispatch(fetchFacts())}>Get Facts</button>
+      <Button size="medium" variant="contained" onClick={() => dispatch(fetchFacts())}>Get Facts</Button>
       <div>
         {factValue && factValue.data
           ? factValue.data.map((fact, index) => (
-              <div key={fact.id}>
+              <div className="fact-border" key={fact.id}>
                 <p>{fact.attributes.body}</p>
-                <button onClick={() => handleSaveFact(fact.attributes.body)}>Save</button>
+                <Button size="medium" variant="contained" onClick={() => handleSaveFact(fact.attributes.body)}>Save</Button>
               </div>
             ))
           : null}

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useDispatch} from "react-redux";
 import { signupUser } from "../../redux/reducers/userReducer";
 import { useNavigate } from 'react-router-dom';
+import Input from '@mui/material/Input';
+import Button from '@mui/material/Button';
+
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -29,14 +32,25 @@ function Signup() {
     navigate('/');
   };
 
+  const imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTad2AgbxdkUcqhdkC9SIKg8nI2VRgi-U-kyg&usqp=CAU";
+  //  style object for the background image
+  const backgroundStyle = {
+    backgroundImage: `url(${imageURL})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh' 
+  };
+
   return (
-    <div>
+    <div style={backgroundStyle}>
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
-          <input
+          <label htmlFor="username">Username: </label>
+          <Input
             type="text"
+            placeholder="Create your username"
+            size="md"
             id="username"
             name="username"
             value={formData.username}
@@ -46,9 +60,11 @@ function Signup() {
         </div>
         
         <div>
-          <label htmlFor="email">Email:</label>
-          <input
+          <label htmlFor="email">Email: </label>
+          <Input
             type="email"
+            placeholder="Enter a valid email"
+            size="md"
             id="email"
             name="email"
             value={formData.email}
@@ -58,9 +74,11 @@ function Signup() {
         </div>
 
         <div>
-          <label htmlFor="password">Password:</label>
-          <input
+          <label htmlFor="password">Password: </label>
+          <Input
             type="password"
+            placeholder="Create your password"
+            size="md"
             id="password"
             name="password"
             value={formData.password}
@@ -68,8 +86,8 @@ function Signup() {
             required
           />
         </div>
-
-        <button type="submit">Signup</button>
+        <br/>
+        <Button type="submit" variant="contained">Signup</Button>
       </form>
     </div>
   );

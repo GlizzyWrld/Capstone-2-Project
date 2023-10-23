@@ -13,8 +13,6 @@ router.post('/users', async (req, res) => {
             return res.status(400).send({message: "Username already registered"})
         }
         const user = await User.create(req.body);
-        
-        await user.save();
 
         //Generate token
         const token = jwtUtil.generateToken(user);
@@ -23,7 +21,7 @@ router.post('/users', async (req, res) => {
 
         console.log(user);
     } catch (error) {
-        console.log(error.message);
+        console.log("The error is... ",error.message);
         res.status(500).json({message: error.message});
     }
 });

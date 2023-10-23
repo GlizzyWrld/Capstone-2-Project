@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteUser, updateUser } from "../../redux/reducers/userReducer";
+import Input from '@mui/material/Input';
+import Button from '@mui/material/Button';
 
 function Profile() {
     const { currentUser } = useSelector((state) => state.user);
@@ -45,26 +47,27 @@ function Profile() {
       <div>
         <p>Username: {currentUser}</p>
         <form onSubmit={handleSubmit}>
-          <label>Change Username</label>
-          <input
+          <label>Change Username: </label>
+          <Input
             type="text"
+            variant="soft"
             name="username"
             id="username"
-            placeholder="Edit Username (Optional)"
+            placeholder=" Edit Username (Optional)"
             onChange={handleChange}
           />
-          <button type="submit">
+          <Button type="submit">
             Update Username
-          </button>
+          </Button>
         </form>
       </div>
 
       <div>
-        <button onClick={() => navigate(`/users/saved/:${currentUser}`)}>View Saved Facts</button>
+        <Button variant="contained" onClick={() => navigate(`/users/saved/:${currentUser}`)}>View Saved Facts</Button>
       </div>
 
       <div>
-        <button onClick={handleDelete}>Delete Account</button>
+        <Button onClick={handleDelete}>Delete Account</Button>
       </div>
     </div>
   );

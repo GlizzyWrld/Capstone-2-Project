@@ -23,10 +23,36 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.title{
+  color: aliceblue;
+}
 .App-link {
   color: #61dafb;
 }
+
+.fact-border {
+  border: 2px solid rgb(42, 153, 238);
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 255, 0.1); 
+  transition: all 0.3s ease; 
+
+
+  &:hover {
+      border-color: red;
+      box-shadow: 2px 2px 8px rgba(0, 0, 255, 0.2);
+  }
+}
+
+.nav-link {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.nav-link:visited {
+  color: inherit !important;
+}
+
 
 @keyframes App-logo-spin {
   from {
